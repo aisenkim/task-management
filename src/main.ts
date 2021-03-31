@@ -12,9 +12,13 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  // if(process.env.NODE_ENV === 'development') {
+  if(process.env.NODE_ENV === 'development') {
     app.enableCors(); // to connect with the frontend
-  // }
+  } else {
+    // when in production mode...
+    app.enableCors({origin: serverConfig.origin});
+    logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
+  }
 
   const port = process.env.PORT || serverConfig.port;
 

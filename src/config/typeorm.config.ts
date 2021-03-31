@@ -13,4 +13,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   autoLoadEntities: true,
   // try to set it to true for the first time running
   synchronize: process.env.TYPEORM_SYNC || dbConfig.synchronize, // not recommended for production setup
+  entities: [__dirname + '/../**/*.entity.{js,ts}']
 };
